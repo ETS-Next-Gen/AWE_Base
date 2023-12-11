@@ -1,6 +1,8 @@
 PACKAGES := AWE_Components AWE_LanguageTool AWE_Lexica AWE_SpellCorrect AWE_Workbench holmes-extractor-expandable
 
-.PHONY: download update install
+.PHONY: all download update install
+
+all: download install
 
 download:
 	@for package in $(PACKAGES); do \
@@ -19,3 +21,6 @@ install:
 		echo "Installing $${package}"; \
 		cd $${package} && pip install -e .; cd .. ; \
 	done
+
+run_language_tool:
+	echo "from awe_languagetool import languagetoolServer; languagetoolServer.runServer()"|python
